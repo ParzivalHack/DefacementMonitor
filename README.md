@@ -41,7 +41,7 @@ Download and double-click on the RunWindows.bat (or just right-click execute on 
 2. Open your web browser and go to `http://127.0.0.1:5000` (localhost:5000).
 3. Enter your Pushover User Key and API Token and the URL you want to monitor.
 4. Click "Save" & "Start Monitoring" to begin.
-5. If you need help with the setup, you can click on the blue "?" at the top right corner of the page to get the initial instructions on hwo to get started :)
+5. If you need help with the setup, you can click on the blue "?" at the top right corner of the page to get the initial instructions on how to get started :)
 
 ## ⚠️ Alert Example
 ![Alert Example](https://github.com/ParzivalHack/DefacementMonitor/assets/82817793/c9e2bd4c-d7a1-4ff4-a551-af214464bfd7)
@@ -63,7 +63,7 @@ Download and double-click on the RunWindows.bat (or just right-click execute on 
 
 ## 🔒 Security Note
 
-Always ensure you're using this tool on websites you own or have permission to monitor. Unauthorized monitoring of websites may be illegal in some jurisdictions. User discretion is advised. The creator of this tool takes no responsibility in unauthorized monitoring activities or any potential damage related to its use.
+Always ensure you're using this tool on websites you own or have permission to monitor. Unauthorized monitoring of websites may be illegal in some jurisdictions. User discretion is advised. The creator of this tool takes no responsibility in unauthorized monitoring activities or any potential damage related.
 
 ## 🤝 Contributing
 
@@ -76,5 +76,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## 📞 Contact
 
 Feel free to connect with me :) 
-[Linkedin](https://www.linkedin.com/in/tommaso-bona-20b76b232/)
-[Email](mailto:tommasobona04@gmail.com)
+* [Linkedin](https://www.linkedin.com/in/tommaso-bona-20b76b232/)
+* [Email](mailto:tommasobona04@gmail.com)
