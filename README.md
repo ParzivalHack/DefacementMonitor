@@ -56,9 +56,14 @@ Download and double-click on the RunWindows.bat (or just right-click execute on 
 - BeautifulSoup4
 - A free Pushover account
 
+## 🔨 To-Do (soon)
+
+1. Allow users to set custom time intervals for checking the website (right now is defaulted to 10 mins).
+2. Allow to monitor multiple websites at once.
+
 ## 🔒 Security Note
 
-Always ensure you're using this tool on websites you own or have permission to monitor. Unauthorized monitoring of websites may be illegal in some jurisdictions. User discretion is advised. The creator of this tool takes no responsibility in unauthorized monitoring activities or any potential damage related.
+Always ensure you're using this tool on websites you own or have permission to monitor. Unauthorized monitoring of websites may be illegal in some jurisdictions. User discretion is advised. The creator of this tool takes no responsibility in unauthorized monitoring activities or any potential damage related to its use.
 
 ## 🤝 Contributing
 
@@ -70,4 +75,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📞 Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_twitter) - email@example.com
+Feel free to connect with me :) 
+[Linkedin](https://www.linkedin.com/in/tommaso-bona-20b76b232/)
+[Email](mailto:tommasobona04@gmail.com)
