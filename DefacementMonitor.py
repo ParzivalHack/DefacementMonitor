@@ -220,6 +220,7 @@ def send_test_notification():
 
 @app.route('/dashboard')
 def dashboard():
+    global urls, last_checks
     job_status = scheduler.get_job('MonitorJob') is not None
     load_last_checks()  # Load the latest last_checks data
     return render_template('dashboard.html', urls=urls, job_status=job_status, last_checks=last_checks)
@@ -240,6 +241,14 @@ def download_report(url):
             f.write(f"Current monitoring status: {'Active' if scheduler.get_job('MonitorJob') else 'Inactive'}\n")
     
     return send_file(report_path, as_attachment=True)
+
+@app.route('/clear_list')
+def clear_list():
+    global urls, last_checks
+    urls = []
+    last_checks = {}
+    flash('Monitored URLs and reports have been cleared.', 'success')
+    return redirect(url_for('dashboard'))
 
 def cron_to_dict(cron_string):
     minute, hour, day, month, day_of_week = cron_string.split()
