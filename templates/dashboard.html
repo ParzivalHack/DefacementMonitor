@@ -17,6 +17,12 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .screenshot-container {
+            margin-top: 20px;
+        }
+        .screenshot-item {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -72,9 +78,19 @@
             </table>
         </div>
 
+        <h2 class="mb-3">Screenshots</h2>
+        <div class="row screenshot-container" id="screenshotContainer">
+            {% for url in urls %}
+            <div class="col-md-6 screenshot-item">
+                <h5>{{ url }}</h5>
+                <img src="{{ url_for('get_screenshot', url=url) }}" class="img-fluid" alt="Screenshot of {{ url }}">
+            </div>
+            {% endfor %}
+        </div>
+
         <div class="mt-4">
             <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Configuration</a>
-            <a href="{{ url_for('clear_list') }}" class="btn btn-danger">Clear List</a> <!-- Added Clear List Button -->
+            <a href="{{ url_for('clear_list') }}" class="btn btn-danger">Clear List</a>
         </div>
     </div>
 
@@ -90,5 +106,18 @@
     {% endwith %}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function refreshScreenshots() {
+            const container = document.getElementById('screenshotContainer');
+            const screenshots = container.querySelectorAll('img');
+            screenshots.forEach(img => {
+                const currentSrc = img.src;
+                img.src = currentSrc.split('?')[0] + '?t=' + new Date().getTime();
+            });
+        }
+
+        // Refresh screenshots every 60 seconds
+        setInterval(refreshScreenshots, 60000);
+    </script>
 </body>
 </html>
