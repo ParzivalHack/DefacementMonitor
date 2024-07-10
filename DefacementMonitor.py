@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, send_file
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file, send_from_directory
 from flask_apscheduler import APScheduler
 import requests
 from bs4 import BeautifulSoup
@@ -58,7 +58,10 @@ def get_detailed_changes(old_content, new_content):
 def take_screenshot(url):
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome(options=options)
+    driver.set_window_size(1920, 1080)  # Set a standard size
     driver.get(url)
     screenshot = driver.get_screenshot_as_png()
     driver.quit()
@@ -98,12 +101,15 @@ def check_for_changes():
         save_last_checks()
         
         report_filename = f"reports/report_{url.replace('://', '_').replace('/', '_')}.txt"
+        screenshot_filename = f"screenshots/{url.replace('://', '_').replace('/', '_')}.png"
+        
+        # Always save the new screenshot
+        new_screenshot.save(screenshot_filename)
         
         if url not in previous_hashes:
             previous_hashes[url] = new_hash
             previous_contents[url] = new_content
             previous_screenshots[url] = new_screenshot
-            new_screenshot.save(f"screenshots/initial_{url.replace('://', '_').replace('/', '_')}.png")
             
             with open(report_filename, "w") as f:
                 f.write(f"Initial check for {url} at {current_time}\n")
@@ -111,7 +117,7 @@ def check_for_changes():
             
             continue
         
-        with open(report_filename, "a") as f:  # Changed to append mode
+        with open(report_filename, "a") as f:
             f.write(f"\nCheck performed for {url} at {current_time}\n")
             
             if new_hash != previous_hashes[url] and is_significant_change(previous_contents[url], new_content):
@@ -120,12 +126,7 @@ def check_for_changes():
                 f.write(changes)
                 f.write("\n")
                 
-                if compare_screenshots(previous_screenshots[url], new_screenshot):
-                    screenshot_filename = f"screenshots/changed_{url.replace('://', '_').replace('/', '_')}.png"
-                    new_screenshot.save(screenshot_filename)
-                    send_pushover_notification(f"Changes detected on {url}. Report: {report_filename}, Screenshot: {screenshot_filename}")
-                else:
-                    send_pushover_notification(f"Changes detected on {url}. Report: {report_filename}")
+                send_pushover_notification(f"Changes detected on {url}. Report: {report_filename}, Screenshot: {screenshot_filename}")
             else:
                 f.write("No significant changes detected.\n\n")
         
@@ -249,6 +250,11 @@ def clear_list():
     last_checks = {}
     flash('Monitored URLs and reports have been cleared.', 'success')
     return redirect(url_for('dashboard'))
+
+@app.route('/screenshot/<path:url>')
+def get_screenshot(url):
+    filename = f"{url.replace('://', '_').replace('/', '_')}.png"
+    return send_from_directory('screenshots', filename)
 
 def cron_to_dict(cron_string):
     minute, hour, day, month, day_of_week = cron_string.split()
