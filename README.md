@@ -25,7 +25,7 @@ Defacement Monitor is a powerful, easy-to-use web application that helps you kee
 ## 🛠 Installation
 
 1. Clone this repository:
-```git clone https://github.com/yourusername/defacement-monitor.git```
+```git clone https://github.com/ParzivalHack/DefacementMonitor```
 3. Navigate to the project directory:
 ```cd DefacementMonitor```
 4. Install the required dependencies:
